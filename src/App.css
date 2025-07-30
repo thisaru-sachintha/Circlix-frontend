@@ -1,0 +1,36 @@
+.main-bg {
+  background-color: #d5edff;
+}
+
+.content-container {
+  display: flex;
+  justify-content: space-evenly !important;
+  flex-wrap: wrap;
+}
+
+.hero-content {
+  max-width: 650px;
+}
+
+.login-cards{
+  width: 500px;
+}
+
+.feature-icon-space{
+  width: 35px !important;
+}
+
+.view-board{
+  height:556px;
+  width:400px;
+  position:relative;
+}
+
+.view-slide{
+    min-height: 556px;
+    width:400px;
+    margin-bottom: 20px;
+    background-color: transparent;
+    position: absolute;
+    transition: .5s;
+}
