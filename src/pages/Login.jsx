@@ -32,7 +32,7 @@ function Login() {
             >
               <li className="nav-item" role="presentation">
                 <button
-                  className="nav-link active rounded-5"
+                className="nav-link active rounded-5"
                   onClick={() => RegisterSlideChange()}
                   data-bs-toggle="tab"
                   type="button"
@@ -45,6 +45,7 @@ function Login() {
               <li className="nav-item" role="presentation">
                 <button
                   className="nav-link rounded-5"
+                  id="signBtn"
                   onClick={() => SignInSlideChange()}
                   data-bs-toggle="tab"
                   type="button"
@@ -66,10 +67,10 @@ function Login() {
             >
               <div className="d-flex flex-column">
                 <h1 className="display-5 lh-1 text-body-emphasis justify-content-center mt-2">
-                  Register
+                  Welcome
                 </h1>
                 <div className="my-4">
-                  <form action="" method="post">
+                  <form>
                     <div className="d-flex flex-row mb-2">
                       <label className="w-50 form-label" htmlFor="">
                         First Name
@@ -122,7 +123,7 @@ function Login() {
                       <label className="w-75 form-label" htmlFor="">
                         Confirm Password
                       </label>
-                      <input className="form-control" type="text" />
+                      <input className="h-50 form-control" type="text" />
                     </div>
                     <div className="d-flex justify-content-between">
                       <button className="btn bg-white border-primary btn-md px-3 mb-2 me-5">
@@ -142,22 +143,31 @@ function Login() {
               style={{ left: signInLeft }}
             >
               <div className="d-flex flex-column">
-                <h1 className="display-5 lh-1 text-body-emphasis justify-content-center mt-2">
-                  Sign Up
+                <h1 className="display-5 lh-1 text-body-emphasis justify-content-center mt-5">
+                  Welcome Back
                 </h1>
-                <div className="my-4 mx-4 py-5">
-                  <form action="" method="post">
-                    <div className="d-flex flex-column mb-2">
-                      <label className="w-75 form-label" htmlFor="">
-                        NIC
-                      </label>
-                      <input className="form-control" type="text" />
+                <div className="my-2 mx-4 py-5">
+                  <form>
+                    <div className="d-flex flex-column mb-4 form-floating">
+                      <input
+                        className="form-control"
+                        id="floatingInput"
+                        placeholder="NIC"
+                        type="text"
+                      />
+                      <label for="floatingInput">NIC</label>
                     </div>
-                    <div className="d-flex flex-column mb-4">
-                      <label className="w-75 form-label" htmlFor="">
-                        Confirm Password
-                      </label>
-                      <input className="form-control" type="text" />
+                    <div className="d-flex flex-column mb-4 form-floating">
+                      <input
+                        className="form-control"
+                        id="floatingPassword"
+                        placeholder="Password"
+                        type="text"
+                      />
+                      <label for="floatingPassword">Password</label>
+                    </div>
+                    <div>
+                      <p className="mb-0">Don't have an account</p>
                     </div>
                     <div className="d-flex justify-content-between">
                       <button className="btn bg-white border-primary btn-md px-3 mb-2 me-5">
