@@ -1,88 +1,75 @@
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+<body data-bs-spy="scroll" data-bs-target="#navbar-example">
+  ...
+  <div id="navbar-example">
+    <ul class="nav nav-tabs" role="tablist">
+      ...
+    </ul>
+  </div>
+  ...
+</body>
 
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-  },
-  {
-    path: "/contact",
-    element: <ContactPage />,
-  },
-
-  {
-    path: "/about",
-    element: <AboutPage />,
-  }
-  , {
-    path: "/user-account",
-    element: <User />,
-  },
-  {
-    path: "/signUp",
-    element: <UserRegister />,
-  },
-  {
-    path: "/signIn",
-    element: <LoginPage />, //initiall page for sign in
-  },
-  {
-    path: "/doctor-information",
-    element: <DoctorInformations />,
-
-  }
-  ,
-
-  {
-    path: "/signIn",
-    element: <SignIn />, //when click sign in button whrere sign in it will redirect to this page
-  },
-  {
-    path: "/",
-    element: <LogoIcon />, //when click logo it will redirect to home page
-  },
-  {
-    path: "/supervisor-signIn",
-    element: <SupervisorLogin />,
-  },
-  {
-    path: "/supervisor-dashboard",
-    element: <Sup_Dashboard />,
-  },
-  {
-    path: "/supervisor/patient-deatails",
-    element: <Sup_PatientData />,
-  },
-  {
-    path: "/supervisor/doctor-deatails",
-    element: <Sup_DoctorData />,
-  },
-  {
-    path: "/supervisor/appoinments",
-    element: <Sup_Appoinments />,
-  },
-  {
-    path: "/supervisor/bills",
-    element: <Sup_Bills />,
-  },
-  {
-    path: "/supervisor/supervisor-deatails",
-    element: <Sup_SupervisorData />,
-  },
-  {
-    path: "/supervisor/doctor-deatails/doctor-register",
-    element: <Sup_DoctorDataRegister />,
-  }
+const scrollSpy = new bootstrap.ScrollSpy(document.body, {
+  target: '#navbar-example'
+})
 
 
-]);
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
-);
+
+
+/////////////////////////////////
+
+div class="row">
+  <div class="col-4">
+    <nav id="navbar-example3" class="h-100 flex-column align-items-stretch pe-4 border-end">
+      <nav class="nav nav-pills flex-column">
+        <a class="nav-link" href="#item-1">Item 1</a>
+        <nav class="nav nav-pills flex-column">
+          <a class="nav-link ms-3 my-1" href="#item-1-1">Item 1-1</a>
+          <a class="nav-link ms-3 my-1" href="#item-1-2">Item 1-2</a>
+        </nav>
+        <a class="nav-link" href="#item-2">Item 2</a>
+        <a class="nav-link" href="#item-3">Item 3</a>
+        <nav class="nav nav-pills flex-column">
+          <a class="nav-link ms-3 my-1" href="#item-3-1">Item 3-1</a>
+          <a class="nav-link ms-3 my-1" href="#item-3-2">Item 3-2</a>
+        </nav>
+      </nav>
+    </nav>
+  </div>
+
+
+  
+  <div class="col-8">
+    <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-smooth-scroll="true" class="scrollspy-example-2" tabindex="0">
+      <div id="item-1">
+        <h4>Item 1</h4>
+        <p>...</p>
+      </div>
+      <div id="item-1-1">
+        <h5>Item 1-1</h5>
+        <p>...</p>
+      </div>
+      <div id="item-1-2">
+        <h5>Item 1-2</h5>
+        <p>...</p>
+      </div>
+      <div id="item-2">
+        <h4>Item 2</h4>
+        <p>...</p>
+      </div>
+      <div id="item-3">
+        <h4>Item 3</h4>
+        <p>...</p>
+      </div>
+      <div id="item-3-1">
+        <h5>Item 3-1</h5>
+        <p>...</p>
+      </div>
+      <div id="item-3-2">
+        <h5>Item 3-2</h5>
+        <p>...</p>
+      </div>
+    </div>
+  </div>
+</div>

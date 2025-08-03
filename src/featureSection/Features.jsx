@@ -13,7 +13,7 @@ function Features() {
     <>
       <div>
         <div className="container px-5 py-5" id="featured-3">
-          <h2 className="display-4">Features</h2>
+          <h2 id="scrollspyHeading2" className="display-4">Features</h2>
           <div className="row g-4 py-5 px-2 row-cols-1 row-cols-lg-3">
             <FeatureCard
               source={search}

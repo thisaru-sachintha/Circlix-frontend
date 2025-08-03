@@ -21,7 +21,7 @@
 }
 
 .view-board{
-  height:556px;
+  height:580px;
   width:400px;
   position:relative;
 }
@@ -33,4 +33,9 @@
     background-color: transparent;
     position: absolute;
     transition: .5s;
+}
+
+.custom-form-control{
+  height:38px !important;
+  min-height: 37px !important;
 }

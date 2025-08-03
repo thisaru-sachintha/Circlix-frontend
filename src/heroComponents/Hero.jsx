@@ -1,6 +1,5 @@
 import React from "react";
 import Clipart from "../component/Clipart";
-import Heading from "../component/Heading";
 import IntroContent from "../component/IntroContent";
 
 function Hero() {
@@ -9,7 +8,9 @@ function Hero() {
       <div className="main-bg content-container pb-sm-0 p-lg-5">
         <div className="hero-content pe-4">
           <div className="p-4 pb-0 pt-lg-5 pb-sm-5 align-items-center">
-            <Heading textContent="Circlix" />
+            <h1 id="scrollspyHeading1" className="display-4 fw-bold lh-1 text-body-emphasis">
+              Circlix
+            </h1>
             <IntroContent textContent="Building Bridges For Reusage" />
             <p class="lead">
               User friendly marketplace for pre-owned goods with "Circular
@@ -17,7 +18,7 @@ function Hero() {
               society.
             </p>
             <div>
-              <button className="btn bg-primary btn-lg px-4 mb-2 me-2">
+              <button formAction="/login" className="btn bg-primary btn-lg px-4 mb-2 me-2">
                 Sign Up
               </button>
               <button className="btn bg-white btn-lg px-4 mb-2 me-2">
