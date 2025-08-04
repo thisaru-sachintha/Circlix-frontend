@@ -68,11 +68,10 @@ function Navbar() {
                   </a>
                 </li>
                 <li className="nav-item">
-                  <button className="btn bg-primary">
-                    Sign Up
-                  </button>
+                  <form action="/login">
+                    <button className="btn bg-primary">Sign Up</button>
+                  </form>
                 </li>
-                
               </ul>
             </div>
           </div>
