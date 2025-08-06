@@ -1,7 +1,7 @@
 import React from "react";
 
-import ItemCardSmall from "../component/ItemCardSmall";
-import ItemModal from "./ItemModal";
+import ItemCardSmall from "./ItemCardSmall";
+import ItemsModal from "./ItemsModal";
 import UserProfileCard from "./UserProfileCard";
 
 function UserCards(props) {
@@ -10,22 +10,34 @@ function UserCards(props) {
       <div>
         <div className="d-flex flex-lg-row flex-sm-column overflow-hidden">
           <div className="w-100 d-flex flex-lg-row flex-sm-column">
-            <UserProfileCard/>
+            <UserProfileCard
+              userName="nagato"
+              fName="nagato"
+              lName="uzumaki"
+              nic="12345"
+              address="kirigakure"
+              dob="01/01/1990"
+              tpNumber="01234"
+              email="nagato@akatsuki.com"
+            />
             {/*user Item list */}
             <div className="h-100 d-flex flex-column bg-dark rounded-4 flex-grow-1">
               <div className="d-flex flex-wrap bg-white h-50 border rounded-top-4 p-3">
                 <h3 className="fs-4">Purchased</h3>
-                <div className="w-100 d-flex flex-row">
-                  <ItemCardSmall />
-                  <ItemCardSmall />
+                <div className="w-100 d-flex flex-row justify-content-between align-items-center">
+                  <div className="">
+                    <ItemCardSmall itemName="item"/>
+                  </div>
+                  <ItemsModal id="Purchased"/>
                 </div>
               </div>
               <div className="d-flex flex-wrap bg-white h-50 border rounded-bottom-4 p-3">
-                <h3 className="fs-4">Bidded</h3>
-                <div className="w-100 d-flex flex-row">
-                  <ItemCardSmall />
-                  <ItemCardSmall />
-                  <ItemModal/>
+                <h3 className="fs-4">Bids</h3>
+                <div className="w-100 d-flex flex-row justify-content-between align-items-center">
+                  <div className="">
+                    <ItemCardSmall itemName="item"/>
+                  </div>
+                  <ItemsModal id="Bids"/>
                 </div>
               </div>
             </div>
@@ -43,16 +55,10 @@ function UserCards(props) {
             <button className="btn bg-primary">Search</button>
           </form>
           <div className="d-flex flex-wrap pt-3">
-            <ItemCardSmall />
-            <ItemCardSmall />
-            <ItemCardSmall />
-            <ItemCardSmall />
-            <ItemCardSmall />
+            <ItemCardSmall itemName="Item"/>
           </div>
         </div>
       </div>
-
-      
     </>
   );
 }

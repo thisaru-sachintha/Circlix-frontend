@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from '../headerComponents/navbar';
 import UserCards from "../UserPageComponents.jsx/UserCards";
+import FooterSection from "../footerSection/FooterSection";
 
 function UserPage() {
     
@@ -8,6 +9,7 @@ function UserPage() {
         <>
         <Navbar/>
         <UserCards/>
+        <FooterSection/>
         </>
     );
 }

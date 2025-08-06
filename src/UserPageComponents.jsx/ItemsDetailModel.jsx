@@ -1,21 +1,29 @@
 import React from "react";
 
-function ItemModal(props) {
-  return (
-    <>
-      <div>
+function ItemsDetailModal(props) {
+
+    const target="#"+props.id;
+    const targetParent="#"+props.parentId;
+
+    function Test(e) {
+      e.preventDefault();
+      console.log(target);
+    }
+    return(
+        <>
+        <div>
         <button
           type="button"
           className="btn btn-primary"
           data-bs-toggle="modal"
-          data-bs-target="#exampleModalFullscreenSm"
+          data-bs-target={target}
         >
-          Full screen below sm
+          Details
         </button>
 
         <div
           className="modal fade"
-          id="exampleModalFullscreenSm"
+          id={props.id}
           tabIndex="-1"
           aria-labelledby="exampleModalFullscreenSmLabel"
           role="dialog"
@@ -27,7 +35,7 @@ function ItemModal(props) {
                   className="modal-title fs-4"
                   id="exampleModalFullscreenSmLabel"
                 >
-                  Purchased
+                  {props.heading}
                 </h1>
                 <button
                   type="button"
@@ -36,14 +44,16 @@ function ItemModal(props) {
                   aria-label="Close"
                 ></button>
               </div>
-              <div className="modal-body">
-                <p>...</p>
+              <div className="modal-body d-flex flex-wrap">
+                <img src={props.imgSrc} />
               </div>
               <div className="modal-footer">
+                {props.parentId==="" ? <button type="button"  onClick={(e)=>Test(e)} className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Bids" >Back</button> : <h2>{targetParent}</h2>}
                 <button
                   type="button"
                   className="btn btn-secondary"
                   data-bs-dismiss="modal"
+                 
                 >
                   Close
                 </button>
@@ -52,8 +62,17 @@ function ItemModal(props) {
           </div>
         </div>
       </div>
-    </>
-  );
+        </>
+    );
+
+    ItemsDetailModal.propTypes ={
+    id: Proptypes.string,
+    parentId: PropTypes.string,
+  }
+  ItemsDetailModal.defaultProps ={
+    id: "Item1",
+    parentId: "",
+  }
 }
 
-export default ItemModal;
+export default ItemsDetailModal;
