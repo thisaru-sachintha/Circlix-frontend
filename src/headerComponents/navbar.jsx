@@ -24,7 +24,7 @@ function Navbar() {
 
           <div
             className="offcanvas offcanvas-start bg-white"
-            tabindex="-1"
+            tabIndex="-1"
             id="offcanvasNavbar"
             aria-labelledby="offcanvasNavbarLabel"
           >

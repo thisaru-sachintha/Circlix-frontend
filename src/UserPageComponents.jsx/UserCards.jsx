@@ -11,14 +11,14 @@ function UserCards(props) {
         <div className="d-flex flex-lg-row flex-sm-column overflow-hidden">
           <div className="w-100 d-flex flex-lg-row flex-sm-column">
             <UserProfileCard
-              userName="nagato"
-              fName="nagato"
-              lName="uzumaki"
+              userName="Kisame"
+              fName="Hoshigaki"
+              lName="Kisame"
               nic="12345"
               address="kirigakure"
               dob="01/01/1990"
               tpNumber="01234"
-              email="nagato@akatsuki.com"
+              email="samehada@akatsuki.com"
             />
             {/*user Item list */}
             <div className="h-100 d-flex flex-column bg-dark rounded-4 flex-grow-1">
@@ -45,7 +45,7 @@ function UserCards(props) {
         </div>
         {/*items */}
         <div className="d-flex ps-5 pt-4 flex-column border rounded-4">
-          <h2 className="fs-2">Items</h2>
+          <h2 className="fs-2">Explore</h2>
           <form className="d-flex flex-row">
             <input
               className="form-control w-25"

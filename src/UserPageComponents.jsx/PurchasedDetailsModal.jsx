@@ -1,14 +1,12 @@
 import React from "react";
 
-function ItemsDetailModal(props) {
 
-    const target="#"+props.id;
-    const targetParent="#"+props.parentId;
+import PropTypes from "prop-types";
 
-    function Test(e) {
-      e.preventDefault();
-      console.log(target);
-    }
+function PurchasedDetailsModal(props) {
+
+  const target="#"+props.id;
+    
     return(
         <>
         <div>
@@ -48,7 +46,7 @@ function ItemsDetailModal(props) {
                 <img src={props.imgSrc} />
               </div>
               <div className="modal-footer">
-                {props.parentId==="" ? <button type="button"  onClick={(e)=>Test(e)} className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Bids" >Back</button> : <h2>{targetParent}</h2>}
+                <button type="button"   className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Purchased" >Back</button>
                 <button
                   type="button"
                   className="btn btn-secondary"
@@ -64,15 +62,6 @@ function ItemsDetailModal(props) {
       </div>
         </>
     );
-
-    ItemsDetailModal.propTypes ={
-    id: Proptypes.string,
-    parentId: PropTypes.string,
-  }
-  ItemsDetailModal.defaultProps ={
-    id: "Item1",
-    parentId: "",
-  }
 }
 
-export default ItemsDetailModal;
+export default PurchasedDetailsModal;

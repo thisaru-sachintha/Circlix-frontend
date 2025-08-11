@@ -1,24 +1,25 @@
 import React from "react";
 
-import ItemCardSmall from "./ItemCardSmall";
-import arrow from "./icons/arrow-right-circle.svg";
 
-function ItemsModal(props) {
+import PropTypes from "prop-types";
+
+function BidDetailsModal(props) {
 
   const target="#"+props.id;
-  return (
-    <>
-      <div>
+    
+    return(
+        <>
+        <div>
         <button
           type="button"
           className="btn btn-primary"
           data-bs-toggle="modal"
           data-bs-target={target}
         >
-          See all <img src={arrow} />
+          Details
         </button>
 
-        <div 
+        <div
           className="modal fade"
           id={props.id}
           tabIndex="-1"
@@ -31,8 +32,8 @@ function ItemsModal(props) {
                 <h1
                   className="modal-title fs-4"
                   id="exampleModalFullscreenSmLabel"
-                > 
-                  {props.id}
+                >
+                  {props.heading}
                 </h1>
                 <button
                   type="button"
@@ -42,20 +43,15 @@ function ItemsModal(props) {
                 ></button>
               </div>
               <div className="modal-body d-flex flex-wrap">
-                <ItemCardSmall modalId={props.id} itemName="item" />
-                <ItemCardSmall modalId={props.id} itemName="item" />
-                <ItemCardSmall modalId={props.id} itemName="item" />
-                <ItemCardSmall modalId={props.id} itemName="item" />
-                <ItemCardSmall modalId={props.id} itemName="item" />
-                <ItemCardSmall modalId={props.id} itemName="item" />
-                <ItemCardSmall modalId={props.id} itemName="item" />
-                <ItemCardSmall modalId={props.id} itemName="item" />
+                <img src={props.imgSrc} />
               </div>
               <div className="modal-footer">
+                <button type="button"   className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Bids" >Back</button>
                 <button
                   type="button"
                   className="btn btn-secondary"
                   data-bs-dismiss="modal"
+                 
                 >
                   Close
                 </button>
@@ -64,8 +60,8 @@ function ItemsModal(props) {
           </div>
         </div>
       </div>
-    </>
-  );
+        </>
+    );
 }
 
-export default ItemsModal;
+export default BidDetailsModal;
