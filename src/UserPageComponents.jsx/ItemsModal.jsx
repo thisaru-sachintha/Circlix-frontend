@@ -1,6 +1,7 @@
 import React from "react";
 
 import ItemCardSmall from "./ItemCardSmall";
+import ModalItemCard from "./ModalItemCard";
 import arrow from "./icons/arrow-right-circle.svg";
 
 function ItemsModal(props) {

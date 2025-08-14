@@ -6,7 +6,7 @@ function UserProfileCard(props) {
   const nDays=36;
   return (
     <>
-      <div className="card rounded-4  d-flex justify-content-center flex-lg-column flex-sm-row col-lg-2 me-1">
+      <div className="card rounded-4 d-flex justify-content-center max-vh-75 flex-lg-column flex-sm-row col-lg-2 me-1">
         <div className="w-100 d-flex justify-content-center align-items-center">
           <div
             className="m-3 bg-primary rounded-circle"

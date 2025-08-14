@@ -8,11 +8,6 @@ function ItemsDetailModal(props) {
   const target = "#" + props.id;
   const targetParent = "#" + props.parentId;
 
-  function Test(e) {
-    e.preventDefault();
-    console.log(targetParent);
-    console.log("Target modal ID:", props.id);
-  }
   return (
     <>
       <div>
@@ -77,6 +72,7 @@ function ItemsDetailModal(props) {
                 </div>
               </div>
               <div className="modal-footer">
+                {(props.parentId) ? <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target={targetParent}>{targetParent}</button>:<></>}
                 <button
                   type="button"
                   className="btn btn-secondary"
