@@ -1,15 +1,17 @@
 import React from "react";
 
-import Navbar from "../headerComponents/navbar";
+import UserNavbar from "../headerComponents/UserNavbar";
 import BidView from "../UserPageComponents.jsx/BidView";
+import UserFooter from "../footerSection/UserFooter";
 
 
 function BidPage(props) {
     
     return(
         <>
-        <Navbar/>
+        <UserNavbar/>
         <BidView/>
+        <UserFooter/>
         </>
     );
 }

@@ -1,15 +1,15 @@
 import React from "react";
-import Navbar from '../headerComponents/navbar';
+import UserNavbar from "../headerComponents/UserNavbar";
 import UserCards from "../UserPageComponents.jsx/UserCards";
-import FooterSection from "../footerSection/FooterSection";
+import UserFooter from "../footerSection/UserFooter";
 
 function UserPage() {
     
     return(
         <>
-        <Navbar/>
+        <UserNavbar/>
         <UserCards/>
-        <FooterSection/>
+        <UserFooter/>
         </>
     );
 }

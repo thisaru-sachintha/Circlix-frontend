@@ -72,7 +72,9 @@ function ItemsDetailModal(props) {
                 </div>
               </div>
               <div className="modal-footer">
-                {(props.parentId) ? <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target={targetParent}>{targetParent}</button>:<></>}
+                <form action="/details">
+                    <button className="btn bg-primary">View Full</button>
+                  </form>
                 <button
                   type="button"
                   className="btn btn-secondary"

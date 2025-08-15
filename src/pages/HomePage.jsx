@@ -5,7 +5,7 @@ import Features from "../featureSection/Features";
 import ServicesSection from "../serviceComponets/ServicesSection";
 import AboutSection from "../aboutSection/AboutSection";
 import ContactSection from "../contactSection/ContactSection";
-import FooterSection from "../footerSection/FooterSection";
+import UserFooter from "../footerSection/UserFooter";
 
 function HomePage() {
     
@@ -20,7 +20,7 @@ function HomePage() {
         <AboutSection/>
         <hr />
         <ContactSection/>
-        <FooterSection/>
+        <UserFooter/>
         </>
     );
 }

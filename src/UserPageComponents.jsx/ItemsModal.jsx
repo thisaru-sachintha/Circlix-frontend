@@ -1,12 +1,8 @@
 import React from "react";
 
-import ItemCardSmall from "./ItemCardSmall";
-import ModalItemCard from "./ModalItemCard";
-import arrow from "./icons/arrow-right-circle.svg";
+import plus from "./icons/plus-circle.svg";
 
 function ItemsModal(props) {
-
-  const target="#"+props.id;
   return (
     <>
       <div>
@@ -14,14 +10,14 @@ function ItemsModal(props) {
           type="button"
           className="btn btn-primary"
           data-bs-toggle="modal"
-          data-bs-target={target}
+          data-bs-target="#newItem"
         >
-          See all <img src={arrow} />
+          Create <img src={plus} />
         </button>
 
-        <div 
+        <div
           className="modal fade"
-          id={props.id}
+          id="newItem"
           tabIndex="-1"
           aria-labelledby="exampleModalFullscreenSmLabel"
           role="dialog"
@@ -32,8 +28,8 @@ function ItemsModal(props) {
                 <h1
                   className="modal-title fs-4"
                   id="exampleModalFullscreenSmLabel"
-                > 
-                  {props.id}
+                >
+                  Create Post
                 </h1>
                 <button
                   type="button"
@@ -43,22 +39,77 @@ function ItemsModal(props) {
                 ></button>
               </div>
               <div className="modal-body d-flex flex-wrap">
-                <ItemCardSmall modalId={props.id} itemName="item" />
-                <ItemCardSmall modalId={props.id} itemName="item" />
-                <ItemCardSmall modalId={props.id} itemName="item" />
-                <ItemCardSmall modalId={props.id} itemName="item" />
-                <ItemCardSmall modalId={props.id} itemName="item" />
-                <ItemCardSmall modalId={props.id} itemName="item" />
-                <ItemCardSmall modalId={props.id} itemName="item" />
-                <ItemCardSmall modalId={props.id} itemName="item" />
+                <form action="">
+                  <div className="mb-2 d-flex flex-row">
+                    <label className="w-75 form-label" htmlFor="">
+                      Category
+                    </label>
+                    <input className="form-control" type="text" />
+                  </div>
+                  <div className="mb-2 d-flex flex-row">
+                    <label className="w-75 form-label" htmlFor="">
+                      Name
+                    </label>
+                    <input className="form-control" type="text" />
+                  </div>
+                  <div className="mb-2 d-flex flex-row">
+                    <label className="w-75 form-label" htmlFor="">
+                      Enter item picture
+                    </label>
+                    <input className="form-control" type="file" />
+                  </div>
+                  <div className="mb-2 d-flex flex-row">
+                    <label className="w-75 form-label" htmlFor="">
+                      Name
+                    </label>
+                    <input className="form-control" type="text" />
+                  </div>
+                  <div className="mb-2 d-flex flex-row">
+                    <label className="w-75 form-label" htmlFor="">
+                      Name
+                    </label>
+                    <input className="form-control" type="text" />
+                  </div>
+                  <div className="mb-2 d-flex flex-row">
+                    <label className="w-75 form-label" htmlFor="">
+                      Name
+                    </label>
+                    <input className="form-control" type="text" />
+                  </div>
+                  <div className="mb-2 d-flex flex-row">
+                    <label className="w-75 form-label" htmlFor="">
+                      Name
+                    </label>
+                    <input className="form-control" type="text" />
+                  </div>
+                  <div className="mb-2 d-flex flex-row">
+                    <label className="w-75 form-label" htmlFor="">
+                      Name
+                    </label>
+                    <input className="form-control" type="text" />
+                  </div>
+                  <div className="mb-2 d-flex flex-row">
+                    <label className="w-75 form-label" htmlFor="">
+                      Name
+                    </label>
+                    <input className="form-control" type="text" />
+                  </div>
+                </form>
               </div>
               <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  data-bs-dismiss="modal"
+                >
+                  Create post
+                </button>
                 <button
                   type="button"
                   className="btn btn-secondary"
                   data-bs-dismiss="modal"
                 >
-                  Close
+                  Cancel
                 </button>
               </div>
             </div>

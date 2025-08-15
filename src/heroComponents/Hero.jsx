@@ -15,7 +15,7 @@ function Hero() {
               Circlix
             </h1>
             <IntroContent textContent="Building Bridges For Reusage" />
-            <p class="lead">
+            <p className="lead">
               User friendly marketplace for pre-owned goods with "Circular
               Economy" concept to gradually increase living standards of the
               society.

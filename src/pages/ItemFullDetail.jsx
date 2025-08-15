@@ -1,18 +1,18 @@
 import React from "react";
 
 import UserNavbar from "../headerComponents/UserNavbar";
-import PuerchasedView from "../UserPageComponents.jsx/PurchasedView";
+import ItemDetailView from "../UserPageComponents.jsx/ItemDetailView";
 import UserFooter from "../footerSection/UserFooter";
 
-function PurchasedPage(params) {
+function ItemFullDetail(params) {
     
     return(
         <>
         <UserNavbar/>
-        <PuerchasedView/>
+        <ItemDetailView/>
         <UserFooter/>
         </>
     );
 }
 
-export default PurchasedPage;
+export default ItemFullDetail;

@@ -1,15 +1,17 @@
 import React from "react";
 
-import Navbar from "../headerComponents/navbar";
+import UserNavbar from "../headerComponents/UserNavbar";
 import ExploreView from "../UserPageComponents.jsx/ExploreView";
+import UserFooter from "../footerSection/UserFooter";
 
 
 function ExplorePage(props) {
     
     return(
         <>
-        <Navbar/>
+        <UserNavbar/>
         <ExploreView/>
+        <UserFooter/>
         </>
     );
 }
