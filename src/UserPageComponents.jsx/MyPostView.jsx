@@ -1,7 +1,7 @@
 import React from "react";
 
 import ItemCardSmall from "./ItemCardSmall";
-import ItemsModal from "./ItemsModal";
+import CreatePostModal from "./CreatePostModal";
 
 function MyPostView(props) {
   return (
@@ -12,7 +12,7 @@ function MyPostView(props) {
             <h2 className="fs-2 ms-1">My Posts</h2>
             <div className="d-flex align-items-center p-2 border rounded-4">
               <h2 className="fs-5 me-4">Create Post</h2>
-              <ItemsModal />
+              <CreatePostModal />
             </div>
           </div>
           <div className="d-flex flex-wrap py-4 px-5 w-100 vh-100 border rounded-4">

@@ -56,6 +56,22 @@ function RegisterSlide(props) {
       alert("Registration failed! Please try again.");
     }
   };
+  {/*Reset inputs */}
+  function restInputs(e) {
+    e.preventDefault();
+    setFormData({
+    firstName: "",
+    lastName: "",
+    address: "",
+    DOB: "",
+    tpNumber: "",
+    email: "",
+    nic: "",
+    password: "",
+    image: null,
+  })
+  document.getElementById("imgInput").form.reset();
+  }
 
   return (
     <>
@@ -132,6 +148,7 @@ function RegisterSlide(props) {
               type="file"
               accept="image/*"
               className="border-5"
+              id="imgInput"
               onChange={(e) =>
                 setFormData({ ...formData, image: e.target.files[0] })
               }
@@ -175,7 +192,7 @@ function RegisterSlide(props) {
               </p>
             </div>
             <div className="d-flex justify-content-between">
-              <button className="btn bg-white border-primary btn-md px-3 mb-2 me-5">
+              <button onClick={(e)=>restInputs(e)} className="btn bg-white border-primary btn-md px-3 mb-2 me-5">
                 Reset
               </button>
               <button

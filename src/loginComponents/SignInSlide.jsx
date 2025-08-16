@@ -56,6 +56,12 @@ function SignInSlide(props) {
       alert("Login failed! Please check your credentials.");
     }
   };
+  {/*Reset values */}
+  function resetInputs(e) {
+    e.preventDefault();
+    setSignInNIC("");
+    setSignInPassword("");
+  }
 
   return (
     <>
@@ -64,12 +70,13 @@ function SignInSlide(props) {
           Welcome Back
         </h1>
         <div className="my-2 mx-4 py-5">
-          <form onSubmit={handleLogin}>
+          <form>
             <SignInInput
               inputId="signInNICNumber"
               labelId="labelNICNumber"
               inputType="text"
               labelText="NIC Number"
+              value={signInNIC}
               onSendData={handleDataFromSignInNIC}
             />
             <SignInInput
@@ -77,6 +84,7 @@ function SignInSlide(props) {
               labelId="labelPassword"
               inputType="password"
               labelText="Password"
+              value={signInPassword}
               onSendData={handleDataFromSignInPassword}
             />
 
@@ -102,11 +110,11 @@ function SignInSlide(props) {
               </p>
             </div>
             <div className="d-flex justify-content-between">
-              <button className="btn bg-white border-primary btn-md px-3 mb-2 me-5">
+              <button onClick={(e)=>resetInputs(e)} className="btn bg-white border-primary btn-md px-3 mb-2 me-5">
                 Reset
               </button>
               <button
-                type="submit"
+                onClick={handleLogin}
                 className="btn bg-primary btn-md px-3 mb-2 me-2"
               >
                 Sign In

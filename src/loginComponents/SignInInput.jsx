@@ -15,6 +15,7 @@ const sendData = (e) => {
           placeholder={props.labelText}
           type={props.inputType}
           onChange={sendData}
+          value={props.value}
         />
         <label htmlFor={props.inputId} id="labelId">{props.labelText}</label>
       </div>
