@@ -1,4 +1,6 @@
 import React from "react";
+import EditProfile from "./EditProfile";
+import DeleteProfile from "./DeleteProfile";
 
 function UserProfileCard(props) {
   const userFullName = props.fName + " " + props.lName;
@@ -35,8 +37,23 @@ function UserProfileCard(props) {
           <li className="list-group-item  text-center">{props.tpNumber}</li>
         </ul>
         <div className="card-body text-center">
-          <button className="btn btn-primary my-3 mx-2">Edit</button>
-          <button className="btn btn-danger my-3 mx-2">Delete</button>
+          <button
+            className="btn btn-primary my-3 mx-2"
+            data-bs-toggle="modal"
+            data-bs-target="#editProfileModal"
+          >
+            Edit
+          </button>
+          <EditProfile userId={props.userId} onUpdate={props.onProfileUpdate} />
+
+          <button
+            className="btn btn-danger my-3 mx-2"
+            data-bs-toggle="modal"
+            data-bs-target="#deleteProfileModal"
+          >
+            Delete
+          </button>
+          <DeleteProfile userId={props.userId} />
         </div>
       </div>
     </>

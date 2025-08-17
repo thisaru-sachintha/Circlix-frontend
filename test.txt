@@ -1,429 +1,241 @@
-<body data-bs-spy="scroll" data-bs-target="#navbar-example">
-  ...
-  <div id="navbar-example">
-    <ul class="nav nav-tabs" role="tablist">
-      ...
-    </ul>
-  </div>
-  ...
-</body>
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import ItemCardSmall from "./ItemCardSmall"; // your existing card component
 
+function PostManager() {
+  const [posts, setPosts] = useState([]);
+  const [editPost, setEditPost] = useState(null);
+  const [bidValue, setBidValue] = useState("");
 
-const scrollSpy = new bootstrap.ScrollSpy(document.body, {
-  target: '#navbar-example'
-})
+  // Fetch posts from API
+  const fetchPosts = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const { data } = await axios.get("http://localhost:8080/api/v1/posts", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setPosts(data);
+    } catch (err) {
+      console.error("Error fetching posts:", err);
+    }
+  };
 
+  // Delete post by ID
+  const handleDelete = async (postId) => {
+    try {
+      const token = localStorage.getItem("token");
+      await axios.delete(`http://localhost:8080/api/v1/posts/${postId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      alert("Post deleted!");
+      fetchPosts(); // refresh list
+    } catch (err) {
+      console.error("Error deleting post:", err);
+    }
+  };
 
+  // Edit post
+  const handleEdit = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      await axios.put(
+        `http://localhost:8080/api/v1/posts/${editPost.id}`,
+        editPost,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      alert("Post updated!");
+      setEditPost(null);
+      fetchPosts();
+    } catch (err) {
+      console.error("Error editing post:", err);
+    }
+  };
 
+  // Bid on post
+  const handleBid = async (postId, bidLimit) => {
+    const bid = parseFloat(bidValue);
+    if (isNaN(bid) || bid <= bidLimit) {
+      alert(`Bid must be greater than ${bidLimit}`);
+      return;
+    }
 
+    try {
+      const token = localStorage.getItem("token");
+      await axios.post(
+        `http://localhost:8080/api/v1/posts/${postId}/bid`,
+        { bidAmount: bid },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      alert("Bid placed!");
+      setBidValue("");
+      fetchPosts();
+    } catch (err) {
+      console.error("Error placing bid:", err);
+    }
+  };
 
-/////////////////////////////////
+  useEffect(() => {
+    fetchPosts();
+  }, []);
 
-div class="row">
-  <div class="col-4">
-    <nav id="navbar-example3" class="h-100 flex-column align-items-stretch pe-4 border-end">
-      <nav class="nav nav-pills flex-column">
-        <a class="nav-link" href="#item-1">Item 1</a>
-        <nav class="nav nav-pills flex-column">
-          <a class="nav-link ms-3 my-1" href="#item-1-1">Item 1-1</a>
-          <a class="nav-link ms-3 my-1" href="#item-1-2">Item 1-2</a>
-        </nav>
-        <a class="nav-link" href="#item-2">Item 2</a>
-        <a class="nav-link" href="#item-3">Item 3</a>
-        <nav class="nav nav-pills flex-column">
-          <a class="nav-link ms-3 my-1" href="#item-3-1">Item 3-1</a>
-          <a class="nav-link ms-3 my-1" href="#item-3-2">Item 3-2</a>
-        </nav>
-      </nav>
-    </nav>
-  </div>
-
-
-  
-  <div class="col-8">
-    <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-smooth-scroll="true" class="scrollspy-example-2" tabindex="0">
-      <div id="item-1">
-        <h4>Item 1</h4>
-        <p>...</p>
-      </div>
-      <div id="item-1-1">
-        <h5>Item 1-1</h5>
-        <p>...</p>
-      </div>
-      <div id="item-1-2">
-        <h5>Item 1-2</h5>
-        <p>...</p>
-      </div>
-      <div id="item-2">
-        <h4>Item 2</h4>
-        <p>...</p>
-      </div>
-      <div id="item-3">
-        <h4>Item 3</h4>
-        <p>...</p>
-      </div>
-      <div id="item-3-1">
-        <h5>Item 3-1</h5>
-        <p>...</p>
-      </div>
-      <div id="item-3-2">
-        <h5>Item 3-2</h5>
-        <p>...</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-<div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
- <div class="carousel-indicators">
-  <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="" aria-label="Slide 1"></button>
-   <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2" class=""></button>
-    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3" class="active" aria-current="true"></button>
-     </div>
-      <div class="carousel-inner"> 
-      <div class="carousel-item">
-       <svg aria-hidden="true" class="bd-placeholder-img " height="100%" preserveAspectRatio="xMidYMid slice" width="100%" xmlns="http://www.w3.org/2000/svg">
-       <rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect>
-       </svg> 
-       <div class="container">
-        <div class="carousel-caption text-start">
-         <h1>Example headline.</h1> 
-         <p class="opacity-75">Some representative placeholder content for the first slide of the carousel.</p>
-          <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p> 
-          </div>
-           </div>
-            </div> <div class="carousel-item">
-             <svg aria-hidden="true" class="bd-placeholder-img " height="100%" preserveAspectRatio="xMidYMid slice" width="100%" xmlns="http://www.w3.org/2000/svg">
-             <rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect>
-             </svg> 
-             <div class="container">
-              <div class="carousel-caption"> 
-              <h1>Another example headline.</h1> 
-              <p>Some representative placeholder content for the second slide of the carousel.</p>
-               <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p> 
-               </div> 
-               </div> 
-               </div> 
-               <div class="carousel-item active">
-                <svg aria-hidden="true" class="bd-placeholder-img " height="100%" preserveAspectRatio="xMidYMid slice" width="100%" xmlns="http://www.w3.org/2000/svg">
-                <rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect>
-                </svg> 
-                <div class="container"> 
-                <div class="carousel-caption text-end"> 
-                <h1>One more for good measure.</h1> 
-                <p>Some representative placeholder content for the third slide of this carousel.</p>
-                 <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p> 
-                 </div> 
-                 </div> 
-                 </div> 
-                 </div> 
-                 <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev"> 
-                 <span class="carousel-control-prev-icon" aria-hidden="true"></span> 
-                 <span class="visually-hidden">Previous</span> </button> 
-                 <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next"> 
-                 <span class="carousel-control-next-icon" aria-hidden="true"></span> 
-                 <span class="visually-hidden">Next</span> </button> 
-                 </div>
-
-
-                 /////////////////////////////card
-
-                 <div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>
-///////////////////////////////////////
-
-<div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">An item</li>
-    <li class="list-group-item">A second item</li>
-    <li class="list-group-item">A third item</li>
-  </ul>
-  <div class="card-body">
-    <a href="#" class="card-link">Card link</a>
-    <a href="#" class="card-link">Another link</a>
-  </div>
-</div>
-
-////////////////
-<div class="modal-dialog modal-dialog-scrollable">
-  ...
-</div>
-
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-  Launch static backdrop modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Understood</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-/////////////////////////////////////////////////////////
-double modal
-
-
-<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Modal 1</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Show a second modal and hide this one with the button below.
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Open second modal</button>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Modal 2</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Hide this modal and show the first with the button below.
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Back to first</button>
-      </div>
-    </div>
-  </div>
-</div>
-<button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Open first modal</button>
-
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-ItemsModal.jsx
-////////////////////
-
-import React from "react";
-
-import ItemCardSmall from "./ItemCardSmall";
-import arrow from "./icons/arrow-right-circle.svg";
-
-function ItemModal(props) {
-
-  const target="#"+props.id;
   return (
-    <>
-      <div>
-        <button
-          type="button"
-          className="btn btn-primary"
-          data-bs-toggle="modal"
-          data-bs-target={target}
-        >
-          See all <img src={arrow} />
-        </button>
+    <div className="container">
+      <h2 className="my-3">All Posts</h2>
+      <div className="row">
+        {posts.map((post) => (
+          <div key={post.id} className="col-md-4 mb-4">
+            <ItemCardSmall
+              title={post.itemName}
+              description={post.description}
+              image={post.imageUrl}
+              category={post.category}
+              bidLimit={post.bidLimit}
+              status={post.status}
+            />
+            <div className="d-flex justify-content-between mt-2">
+              <button
+                className="btn btn-danger"
+                onClick={() => handleDelete(post.id)}
+              >
+                Delete
+              </button>
+              <button
+                className="btn btn-warning"
+                onClick={() => setEditPost(post)}
+              >
+                Edit
+              </button>
+            </div>
+            <div className="mt-2">
+              <input
+                type="number"
+                className="form-control"
+                placeholder={`Bid > ${post.bidLimit}`}
+                value={bidValue}
+                onChange={(e) => setBidValue(e.target.value)}
+              />
+              <button
+                className="btn btn-primary mt-1"
+                onClick={() => handleBid(post.id, post.bidLimit)}
+              >
+                Place Bid
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
 
-        <div
-          className="modal fade"
-          id={props.id}
-          tabIndex="-1"
-          aria-labelledby="exampleModalFullscreenSmLabel"
-          role="dialog"
-        >
-          <div className="modal-dialog modal-dialog-scrollable modal-fullscreen-sm-down">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h1
-                  className="modal-title fs-4"
-                  id="exampleModalFullscreenSmLabel"
-                >
-                  {props.id}
-                </h1>
-                <button
-                  type="button"
-                  className="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div className="modal-body d-flex flex-wrap">
-                <ItemCardSmall modalId={target} itemName="item" />
-                <ItemCardSmall itemName="item" />
-                <ItemCardSmall itemName="item" />
-                <ItemCardSmall itemName="item" />
-                <ItemCardSmall itemName="item" />
-                <ItemCardSmall itemName="item" />
-                <ItemCardSmall itemName="item" />
-                <ItemCardSmall itemName="item" />
-              </div>
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-              </div>
+      {/* Edit Modal (simplified inline form) */}
+      {editPost && (
+        <div className="modal show d-block bg-dark bg-opacity-50">
+          <div className="modal-dialog">
+            <div className="modal-content p-3">
+              <h5>Edit Post</h5>
+              <input
+                type="text"
+                className="form-control mb-2"
+                value={editPost.itemName}
+                onChange={(e) =>
+                  setEditPost({ ...editPost, itemName: e.target.value })
+                }
+              />
+              <textarea
+                className="form-control mb-2"
+                value={editPost.description}
+                onChange={(e) =>
+                  setEditPost({ ...editPost, description: e.target.value })
+                }
+              />
+              <button className="btn btn-success me-2" onClick={handleEdit}>
+                Save
+              </button>
+              <button
+                className="btn btn-secondary"
+                onClick={() => setEditPost(null)}
+              >
+                Cancel
+              </button>
             </div>
           </div>
         </div>
-      </div>
-    </>
+      )}
+    </div>
   );
 }
 
-export default ItemModal;
+export default PostManager;
 
 
-//////////////////////////////////////////////////////////////
+///////////////////////////////////////////////
 
-ItemCardSmall
-/////////////////////////////
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import ItemCardSmall from "./ItemCardSmall"; // Your reusable card component
+
+function PostList() {
+  const [posts, setPosts] = useState([]);
+
+  // Fetch posts from API
+  const fetchPosts = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const { data } = await axios.get("http://localhost:8080/api/v1/posts", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setPosts(data); // assuming data is an array of posts
+    } catch (error) {
+      console.error("Failed to fetch posts:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
+  return (
+    <div className="container mt-4">
+      <h3>All Posts</h3>
+      <div className="row">
+        {posts.map((post) => (
+          <div key={post.id} className="col-md-4 mb-4">
+            <ItemCardSmall
+              title={post.itemName}
+              description={post.description}
+              image={post.imageUrl}
+              category={post.category}
+              bidLimit={post.bidLimit}
+              status={post.status}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default PostList;
+
+////////////////////////////////////////////////////////
+
 import React from "react";
 
-import ItemsDetailModal from "./ItemsDetailModel";
-import testImg from "./icons/arrow-right-circle.svg"
-
-function ItemCardSmall(props) {
-
-  const modalId = props.modalId;
+function ItemCardSmall({ title, description, image, category, bidLimit, status }) {
   return (
-    <>
-      <div className="card p-1 pb-0 me-2 mb-2" style={{width: "12rem",height:"12rem"}}>
-        <div className="d-flex justify-content-center justify-content-center mt-1">
-            <img src={testImg} style={{width: "6rem"}} className="card-img-top" alt="..." />
-        </div>
-        <div className="card-body p-1 ps-3">
-          <h5 className="card-title">{props.itemName}</h5>
-          <h5 className="card-title">{props.modalId}</h5>
-          <ItemsDetailModal imgSrc={testImg} modalId={modalId} id="item1" heading={props.itemName}/>
-        </div>
+    <div className="card h-100">
+      <img src={image} className="card-img-top" alt={title} />
+      <div className="card-body">
+        <h5 className="card-title">{title}</h5>
+        <p className="card-text">{description}</p>
+        <p><strong>Category:</strong> {category}</p>
+        <p><strong>Bid Limit:</strong> ${bidLimit}</p>
+        <p><strong>Status:</strong> {status}</p>
       </div>
-    </> 
+    </div>
   );
-
-  ItemCardSmall.propTypes ={
-    itemName: Proptypes.string,
-    parentId: PropTypes.string,
-  }
 }
 
 export default ItemCardSmall;
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
-ItemsDetailModal
-
-/////////////////////////////////////////
-import React from "react";
-
-function ItemsDetailModal(props) {
-
-    const target="#"+props.id;
-    const targetParent="#"+props.modalId;
-
-    function Test(e) {
-      e.preventDefault();
-      console.log(targetParent);
-    }
-    return(
-        <>
-        <div>
-        <button
-          type="button"
-          className="btn btn-primary"
-          data-bs-toggle="modal"
-          data-bs-target={target}
-        >
-          Details
-        </button>
-
-        <div
-          className="modal fade"
-          id={props.id}
-          tabIndex="-1"
-          aria-labelledby="exampleModalFullscreenSmLabel"
-          role="dialog"
-        >
-          <div className="modal-dialog modal-dialog-scrollable modal-fullscreen-sm-down">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h1
-                  className="modal-title fs-4"
-                  id="exampleModalFullscreenSmLabel"
-                >
-                  {props.heading}
-                </h1>
-                <button
-                  type="button"
-                  className="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div className="modal-body d-flex flex-wrap">
-                <img src={props.imgSrc} />
-              </div>
-              <div className="modal-footer">
-                {props.parentId!="" ? <button type="button"  onClick={(e)=>Test(e)} className="btn btn-primary" data-bs-toggle="modal" data-bs-target={targetParent} >Back</button> : <h2>{targetParent}</h2>}
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                 
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-        </>
-    );
-
-    ItemsDetailModal.propTypes ={
-    id: Proptypes.string,
-    parentId: PropTypes.string,
-  }
-  ItemsDetailModal.defaultProps ={
-    id: "Item1",
-    parentId: "",
-  }
-}
-
-export default ItemsDetailModal;
-
-//////////////////////////////////////////////
-
-
-<div>{props.modelId!="" ? <button type="button"  onClick={(e)=>Test(e)} className="btn btn-primary" data-bs-toggle="modal" data-bs-target={target} >Back</button> : <h2>{target}</h2>}</div>

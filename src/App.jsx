@@ -20,6 +20,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<UserAccess />} />
+          <Route path="/user/:token" element={<UserPage />} />
           <Route path="/user" element={<UserPage />} />
           <Route path="/purchases" element={<PurchasedPage />} />
           <Route path="/bids" element={<BidPage />} />

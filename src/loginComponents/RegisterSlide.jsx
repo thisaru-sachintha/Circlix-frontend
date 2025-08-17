@@ -44,7 +44,8 @@ function RegisterSlide(props) {
         localStorage.setItem("token", token);
         localStorage.setItem("user", JSON.stringify(user));
         alert("Login successful!");
-        navigate("/user");
+        navigate(`/user/${token}`);
+
       } else {
         alert("Login failed: No token received.");
       }

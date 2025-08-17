@@ -1,6 +1,16 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function UserNavbar() {
+
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/login");
+  };
+
+
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-white" data-bs-theme="light">
@@ -69,7 +79,7 @@ function UserNavbar() {
                 </li>
                 <li className="nav-item">
                   <form action="/login">
-                    <button className="btn bg-primary">Logout</button>
+                    <button onClick={handleLogout} className="btn bg-primary">Logout</button>
                   </form>
                 </li>
               </ul>
