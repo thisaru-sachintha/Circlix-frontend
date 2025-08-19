@@ -1,6 +1,7 @@
 import React from "react";
 import EditProfile from "./EditProfile";
 import DeleteProfile from "./DeleteProfile";
+import ApiImage from "../component/ApiImage";
 
 function UserProfileCard(props) {
   const userFullName = props.fName + " " + props.lName;
@@ -13,16 +14,7 @@ function UserProfileCard(props) {
             className="m-3 rounded-circle shadow-lg overflow-hidden"
             style={{ width: "120px", height: "120px" }}
           >
-            <img
-              src={props.userImg}
-              alt=""
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                display: "block",
-              }}
-            />
+            <ApiImage apiUrl={props.userImage} width="120px" height="120px"/>
           </div>
         </div>
         <div className="card-body d-flex flex-column justify-content-center col-lg-12 col-sm-6">

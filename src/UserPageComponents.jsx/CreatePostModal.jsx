@@ -37,7 +37,10 @@ function CreatePostModal(props) {
       image2,
     } = formData;
 
-    
+    if (image1.size > 1 * 1024 * 1024 || image2.size > 1 * 1024 * 1024) {
+      alert("Images must be under 2MB.");
+      return;
+    }
 
     const payload = new FormData();
     payload.append("startDate", startDate);
@@ -52,21 +55,20 @@ function CreatePostModal(props) {
 
     try {
       if (
-      !startDate ||
-      !endDate ||
-      !startTime ||
-      !endTime ||
-      !bidLimit ||
-      !itemType ||
-      !description ||
-      !image1 ||
-      !image2
-    ) {
-      alert("Please fill in all fields.");
-      throw new Error("Empty fields");
-      return;
-    }
-      await axios.post("https://your-api-endpoint.com/create-post", payload);
+        !startDate ||
+        !endDate ||
+        !startTime ||
+        !endTime ||
+        !bidLimit ||
+        !itemType ||
+        !description ||
+        !image1 ||
+        !image2
+      ) {
+        alert("Please fill in all fields.");
+        return;
+      }
+      await axios.post("http://localhost:8081/api/v1/post/CreatePost", payload);
       alert("Post created successfully!");
     } catch (error) {
       console.error("Error creating post:", error);
@@ -75,23 +77,24 @@ function CreatePostModal(props) {
   };
 
   const handleReset = () => {
-  setFormData({
-    startDate: "",
-    endDate: "",
-    startTime: "",
-    endTime: "",
-    bidLimit: "",
-    itemType: "",
-    description: "",
-    image1: null,
-    image2: null,
-  });
+    setFormData({
+      startDate: "",
+      endDate: "",
+      startTime: "",
+      endTime: "",
+      bidLimit: "",
+      itemType: "",
+      description: "",
+      image1: null,
+      image2: null,
+    });
 
-  document.querySelectorAll("#newItem input[type='file']").forEach((input) => {
-    input.value = "";
-  });
-};
-
+    document
+      .querySelectorAll("#newItem input[type='file']")
+      .forEach((input) => {
+        input.value = "";
+      });
+  };
 
   return (
     <>
@@ -244,7 +247,7 @@ function CreatePostModal(props) {
                 <button
                   type="button"
                   className="btn btn-primary"
-                  onClick={handleSubmit}
+                  onClick={handleReset}
                   data-bs-dismiss="modal"
                 >
                   Reset

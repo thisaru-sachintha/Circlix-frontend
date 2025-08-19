@@ -18,7 +18,6 @@ function SignInSlide(props) {
   const [showEmailModal, setShowEmailModal] = useState(false);
   const [showOTPModal, setShowOTPModal] = useState(false);
 
-  const [recoveryNIC, setRecoveryNIC] = useState("");
   const [recoveryEmail, setRecoveryEmail] = useState("");
   const [otp, setOTP] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -45,19 +44,33 @@ function SignInSlide(props) {
   const handleLogin = async (e) => {
     e.preventDefault();
 
+    if (!signInNIC || !signInPassword) {
+      alert("Please enter both NIC and password.");
+      return;
+    }
+
+    const signData = {
+      nic: signInNIC,
+      password: signInPassword,
+    };
+
     try {
-      console.log({ signInNIC, signInPassword });
+      console.log(signData);
 
       const response = await axios.post(
-        "http://http://localhost:8080/api/v1/user/signIn",
-        JSON.stringify({ signInNIC, signInPassword })
+        "http://localhost:8080/api/v1/user/signIn",
+        signData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
 
-      const { token, user } = response.data;
+      const token = response.data.token;
 
       if (token) {
         localStorage.setItem("token", token);
-        localStorage.setItem("user", JSON.stringify(user));
         alert("Login successful!");
         navigate("/user");
       } else {
@@ -81,10 +94,15 @@ function SignInSlide(props) {
     /*Forgot password process */
   }
   const handleSendOTP = async () => {
+    if (!recoveryEmail) {
+      alert("Please enter OTP and new password.");
+      return;
+    }
+
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/v1/user/send-otp",
-        { nic: recoveryNIC, email: recoveryEmail }
+        "http://localhost:8080/api/v1/user/forgot-password",
+        { email: recoveryEmail }
       );
       if (response.data.success) {
         setShowEmailModal(false);
@@ -99,15 +117,19 @@ function SignInSlide(props) {
   };
 
   const handleVerifyOTPAndReset = async () => {
+    if (!otp || !newPassword) {
+      alert("Please enter OTP and new password.");
+      return;
+    }
+
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/v1/user/verify-otp-and-reset",
-        { nic: recoveryNIC, otp, newPassword }
+        "http://localhost:8080/api/v1/user/verify-OTP",
+        { email: recoveryEmail, otp: otp, newPassword: newPassword }
       );
-      const { token, user } = response.data;
+      const token = response.data.token;
       if (token) {
         localStorage.setItem("token", token);
-        localStorage.setItem("user", JSON.stringify(user));
         alert("Password reset successful! Logged in.");
         setShowOTPModal(false);
         navigate("/user");
@@ -193,22 +215,15 @@ function SignInSlide(props) {
           </p>
         </div>
       </div>
-      {/* Modal 1: NIC + Email */}
+      {/* Modal 1: Email */}
       <div
         className={`modal fade ${showEmailModal ? "show d-block" : ""}`}
         tabIndex="-1"
-        aria-hidden="true"
+        aria-hidden={!showEmailModal}
       >
         <div className="modal-dialog">
           <div className="modal-content p-3">
             <h5>Account Recover</h5>
-            <input
-              type="text"
-              className="form-control mb-2"
-              placeholder="NIC"
-              value={recoveryNIC}
-              onChange={(e) => setRecoveryNIC(e.target.value)}
-            />
             <input
               type="email"
               className="form-control mb-2"
@@ -226,7 +241,6 @@ function SignInSlide(props) {
               >
                 Cancel
               </button>
-              
             </div>
           </div>
         </div>

@@ -3,14 +3,25 @@ import React from "react";
 import arrow from "../assets/arrow-right-circle.svg";
 import axios from "axios";
 
-
 function ItemDetailView(props) {
-
-  const { item, parentComponent } = props;
+  const {
+    itemId,
+    itemName,
+    category,
+    description,
+    bidLimit,
+    startDate,
+    startTime,
+    endDate,
+    endTime,
+    parentComponent,
+  } = props;
 
   const handleDeletePost = async () => {
     try {
-      const response = await axios.delete(`http://localhost:8080/api/v1/post/${item.id}`);
+      const response = await axios.delete(
+        `http://localhost:8080/api/v1/post/${itemId}`
+      );
       alert("Post deleted successfully.");
     } catch (error) {
       console.error("Delete error:", error.response?.data || error.message);
@@ -25,7 +36,10 @@ function ItemDetailView(props) {
 
   const handleCancelBid = async () => {
     try {
-      const response = await axios.post(`http://localhost:8080/api/v1/bid/cancel`, { bidId: item.bidId });
+      const response = await axios.post(
+        `http://localhost:8080/api/v1/bid/cancel`,
+        { itemId }
+      );
       alert("Bid cancelled successfully.");
     } catch (error) {
       console.error("Cancel bid error:", error.response?.data || error.message);
@@ -35,10 +49,13 @@ function ItemDetailView(props) {
 
   const handleAddBid = async () => {
     try {
-      const response = await axios.post(`http://localhost:8080/api/v1/bid/add`, {
-        itemId: item.id,
-        bidAmount: 1000 // Replace with dynamic input if needed
-      });
+      const response = await axios.post(
+        `http://localhost:8080/api/v1/bid/add`,
+        {
+          itemId,
+          bidAmount: 1000, // Replace with dynamic input if needed
+        }
+      );
       alert("Bid added successfully.");
     } catch (error) {
       console.error("Add bid error:", error.response?.data || error.message);
@@ -46,13 +63,16 @@ function ItemDetailView(props) {
     }
   };
 
+  const expiration = new Date(`${endDate}T${endTime}`);
+  const now = new Date();
+  const status = now > expiration ? "Expired" : "Active";
 
   return (
     <>
       <div>
         <div>
           <div className="d-flex ps-5 pt-4 flex-column border-top">
-            <h2 className="fs-2 ms-1">Item Deatails</h2>
+            <h2 className="fs-2 ms-1">Item Details</h2>
           </div>
           <div className="d-flex flex-row py-4 px-5 w-100 vh-100 border rounded-4">
             <div className="col">
@@ -72,8 +92,107 @@ function ItemDetailView(props) {
               </div>
             </div>
             <div className="col">
-              <div className="d-flex ">
-                <ul className="list-group list-group-flush  d-flex flex-wrap justify-content-center border-0">
+              <div className="d-flex flex-column">
+                {itemId ? (
+                  <ul className="list-group list-group-flush  d-flex flex-wrap justify-content-center border-0">
+                  {[
+                    { label: "Item Name", itemValue: itemName },
+                    { label: "Category", itemValue: category },
+                    { label: "Description", itemValue: description },
+                    { label: "Bid limit", itemValue: bidLimit },
+                    { label: "Bid Status", itemValue: status },
+                    { label: "Bid start Date", itemValue: startDate },
+                    { label: "Bid start Time", itemValue: startTime },
+                    { label: "Bid end Date", itemValue: endDate },
+                    { label: "Bid end Time", itemValue: endTime },
+                  ].map(({ label, itemValue }) => (
+                    <div className="d-flex flex-row" key={label}>
+                      <li
+                        className="list-group-item text-start border-0"
+                        style={{ width: "160px" }}
+                      >
+                        {label}
+                      </li>
+                      <li
+                        className="list-group-item text-start border-0"
+                        style={{ width: "200px" }}
+                      >
+                        {": "}{itemValue}
+                      </li>
+                    </div>
+                  ))}
+                </ul>
+        ) : (
+          <p className="text-danger mt-3">Item not found.</p>
+        )}
+                
+              </div>
+              {/* Action Buttons */}
+              <div className="mt-4 d-flex gap-3 justify-content-center">
+                {parentComponent === "myPost" && (
+                  <>
+                    <button
+                      className="btn btn-danger"
+                      onClick={handleDeletePost}
+                    >
+                      Delete Post
+                    </button>
+                    <button
+                      className="btn btn-warning"
+                      onClick={handleEditPost}
+                    >
+                      Edit Post
+                    </button>
+                  </>
+                )}
+                {parentComponent === "bids" && (
+                  <button
+                    className="btn btn-outline-danger"
+                    onClick={handleCancelBid}
+                  >
+                    Cancel Bid
+                  </button>
+                )}
+                {parentComponent !== "explore" && (
+                  <button className="btn btn-success" onClick={handleAddBid}>
+                    Add Bid
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export default ItemDetailView;
+
+{
+  /*
+  {[
+                { label: "Item Name", itemValue: "itemName" },
+                { label: "Category", itemValue: "category" },
+                { label: "Description", itemValue: "description" },
+                { label: "Bid limit", itemValue: "bidLimit" },
+                { label: "Bid Status", itemValue: "status" },
+                { label: "Bid start Date", itemValue: "startDate"},
+                { label: "Bid start Time", itemValue: "startTime" },
+                { label: "Bid end Date", itemValue: "endDate"},
+                { label: "Bid end Time", itemValue: "endTime" },
+              ].map(({ label, itemValue}) => (
+                <div className="d-flex flex-row" key={label}>
+                  <li className="list-group-item text-start border-0" style={{width:"200px"}}>
+                    {label}
+                  </li>
+                  <li className="list-group-item text-start border-0" style={{width:"200px"}}>
+                    {itemValue}
+                  </li>
+                </div>
+              ))}
+
+              <ul className="list-group list-group-flush  d-flex flex-wrap justify-content-center border-0">
                   <li className="list-group-item text-start border-0">
                     Item Name
                   </li>
@@ -104,80 +223,38 @@ function ItemDetailView(props) {
                 </ul>
                 <ul className="list-group list-group-flush  d-flex flex-wrap justify-content-center border-0">
                   <li className="list-group-item text-start border-0">
-                    {": "}itemName
+                    {": "}
+                    {itemName}
                   </li>
                   <li className="list-group-item  text-start border-0">
-                    {": "}Category
+                    {": "}
+                    {category}
                   </li>
                   <li className="list-group-item  text-start border-0">
-                    {": "}Description
+                    {": "}
+                    {description}
                   </li>
                   <li className="list-group-item  text-start border-0">
-                    {": "}bidLimit
+                    {": "}
+                    {bidLimit}
                   </li>
                   <li className="list-group-item  text-start border-0">
-                    {": "} Status
+                    {": "} {status}
                   </li>
                   <li className="list-group-item  text-start border-0">
-                    {": "} Status
+                    {": "} {startDate}
                   </li>
                   <li className="list-group-item  text-start border-0">
-                    {": "} Status
+                    {": "}
+                    {startTime}
                   </li>
                   <li className="list-group-item  text-start border-0">
-                    {": "} Status
+                    {": "} {endDate}
                   </li>
                   <li className="list-group-item  text-start border-0">
-                    {": "} Status
+                    {": "} {endTime}
                   </li>
                 </ul>
-              </div>
-              {/* Action Buttons */}
-              <div className="mt-4 d-flex gap-3 justify-content-center">
-                {parentComponent === "myPost" && (
-                  <>
-                    <button className="btn btn-danger" onClick={handleDeletePost}>Delete Post</button>
-                    <button className="btn btn-warning" onClick={handleEditPost}>Edit Post</button>
-                  </>
-                )}
-                {parentComponent === "bids" && (
-                  <button className="btn btn-outline-danger" onClick={handleCancelBid}>Cancel Bid</button>
-                )}
-                {parentComponent !== "explore" && (
-                  <button className="btn btn-success" onClick={handleAddBid}>Add Bid</button>
-                )}
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
-}
-
-export default ItemDetailView;
-
-{/*
-  {[
-                { label: "First Name", name: "firstName" },
-                { label: "Last Name", name: "lastName" },
-                { label: "NIC", name: "nic" },
-                { label: "Date of Birth", name: "DOB", type: "date" },
-                { label: "Address", name: "address" },
-                { label: "Email", name: "email", type: "email" },
-                { label: "Telephone", name: "tpNumber" },
-              ].map(({ label, name, type = "text" }) => (
-                <div className="mb-3" key={name}>
-                  <label className="form-label">{label}</label>
-                  <input
-                    type={type}
-                    className="form-control"
-                    name={name}
-                    value={userData[name]}
-                    onChange={handleChange}
-                  />
-                </div>
-              ))}
   
-  */}
+  */
+}

@@ -1,6 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
+import logo from "../assets/logo.png";
+
 function UserNavbar() {
 
   const navigate = useNavigate();
@@ -27,7 +29,7 @@ function UserNavbar() {
           </button>
           <a className="navbar-brand" href="#">
             <div>
-              <img src="src\assets\logo.png" height={"35px"} alt="" />
+              <img src={logo} height={"35px"} alt="" />
               <span> Circlix</span>
             </div>
           </a>
@@ -40,7 +42,7 @@ function UserNavbar() {
           >
             <div className="offcanvas-header">
               <h4 className="offcanvas-title" id="offcanvasNavbarLabel">
-                <img src="src\assets\logo.png" height={"35px"} alt="" />
+                <img src={logo} height={"35px"} alt="" />
                 <span> Circlix</span>
               </h4>
               <button
@@ -68,8 +70,8 @@ function UserNavbar() {
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/purchases">
-                    Purchases
+                  <a className="nav-link" href="/bidsforme">
+                    Bids For My Posts
                   </a>
                 </li>
                 <li className="nav-item">
