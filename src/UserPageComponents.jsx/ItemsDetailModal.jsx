@@ -24,7 +24,7 @@ function ItemsDetailModal(props) {
   const handleViewFull = () => {
     const Id = itemId; // use the actual prop value
     console.log("1");
-    console.log(parent);
+    console.log(props.parent);
     navigate(`/details/${Id}/${parent}`);
     
     console.log("4");

@@ -14,7 +14,7 @@ function UserProfileCard(props) {
             className="m-3 rounded-circle shadow-lg overflow-hidden"
             style={{ width: "120px", height: "120px" }}
           >
-            <ApiImage apiUrl={props.userImage} width="120px" height="120px"/>
+            <ApiImage apiUrl={props.userImage} width="120px" height="120px" />
           </div>
         </div>
         <div className="card-body d-flex flex-column justify-content-center col-lg-12 col-sm-6">
@@ -22,11 +22,15 @@ function UserProfileCard(props) {
           <p className="card-text text-center">{userFullName}</p>
         </div>
         <ul className="list-group list-group-flush  d-flex flex-wrap justify-content-center border">
-          <li className="list-group-item text-center">{props.nic}</li>
-          <li className="list-group-item  text-center">{props.dob}</li>
-          <li className="list-group-item  text-center">{props.address}</li>
-          <li className="list-group-item  text-center">{props.email}</li>
-          <li className="list-group-item  text-center">{props.tpNumber}</li>
+          {[
+            { label: props.nic },
+            { label: props.dob },
+            { label: props.address },
+            { label: props.email },
+            { label: props.tpNumber },
+          ].map(({ label }) => (
+            <li className="list-group-item text-center">{label}</li>
+          ))}
         </ul>
         <div className="card-body text-center">
           <button
