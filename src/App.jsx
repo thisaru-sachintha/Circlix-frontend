@@ -26,7 +26,7 @@ function App() {
           <Route path="/bids" element={<BidPage />} />
           <Route path="/explore" element={<ExplorePage />} />
           <Route path="/details" element={<ItemFullDetail />} />
-          <Route path="/details/:id/:type" element={<ItemFullDetail />} />
+          <Route path="/details/:type/:id" element={<ItemFullDetail />} />
           <Route path="/myposts" element={<MyPosts />} />
         </Routes>
       </div>
@@ -37,3 +37,9 @@ function App() {
 }
 
 export default App;
+
+{/*
+  <Route path="/details/bids/:id" element={<BidItemDetailPage />} />
+          <Route path="/details/bidsforme/:id" element={<BidsForMeItemDetailPage />} />
+          <Route path="/details/explore/:id" element={<ExploreItemDetailPage />} />
+          <Route path="/details/mypost/:id" element={<MyPostItemDetailPage />} /> */}

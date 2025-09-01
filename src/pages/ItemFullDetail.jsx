@@ -6,7 +6,7 @@ import ItemDetailView from "../UserPageComponents.jsx/ItemDetailView";
 import UserFooter from "../footerSection/UserFooter";
 
 function ItemFullDetail() {
-  const { id, type } = useParams();
+  const { type, id } = useParams();
   const [item, setItem] = useState(0);
 
   const testData = [
@@ -23,6 +23,50 @@ function ItemFullDetail() {
     },
     {
       itemId: "2",
+      itemName: "Chair",
+      category: "Furniture",
+      description: "Ergonomic office chair",
+      bidLimit: "1500",
+      startDate: "2025-12-31",
+      startTime: "23:59",
+      endDate: "2025-11-30",
+      endTime: "18:00",
+    },
+    {
+      itemId: "3",
+      itemName: "Laptop",
+      category: "Electronics",
+      description: "High-end gaming laptop",
+      bidLimit: "5000",
+      startDate: "2025-12-31",
+      startTime: "23:59",
+      endDate: "2025-12-31",
+      endTime: "23:59",
+    },
+    {
+      itemId: "4",
+      itemName: "Chair",
+      category: "Furniture",
+      description: "Ergonomic office chair",
+      bidLimit: "1500",
+      startDate: "2025-12-31",
+      startTime: "23:59",
+      endDate: "2025-11-30",
+      endTime: "18:00",
+    },
+    {
+      itemId: "5",
+      itemName: "Laptop",
+      category: "Electronics",
+      description: "High-end gaming laptop",
+      bidLimit: "5000",
+      startDate: "2025-12-31",
+      startTime: "23:59",
+      endDate: "2025-12-31",
+      endTime: "23:59",
+    },
+    {
+      itemId: "6",
       itemName: "Chair",
       category: "Furniture",
       description: "Ergonomic office chair",
