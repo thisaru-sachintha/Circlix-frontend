@@ -1,11 +1,11 @@
 import React from "react";
-import Navbar from "../HeaderComponents/navbar";
+import Navbar from "../headerComponents/navbar";
 import Hero from "../heroComponents/Hero";
 import Features from "../featureSection/Features";
 import ServicesSection from "../serviceComponets/ServicesSection";
 import AboutSection from "../aboutSection/AboutSection";
 import ContactSection from "../contactSection/ContactSection";
-import UserFooter from "../footerSection/UserFooter";
+import FooterSection from "../footerSection/FooterSection";
 
 function HomePage() {
     
@@ -20,7 +20,7 @@ function HomePage() {
         <AboutSection/>
         <hr />
         <ContactSection/>
-        <UserFooter/>
+        <FooterSection/>
         </>
     );
 }
