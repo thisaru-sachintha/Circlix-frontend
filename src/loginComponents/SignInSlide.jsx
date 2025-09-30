@@ -75,7 +75,7 @@ function SignInSlide(props) {
         alert("Login failed.");
       }
     } catch (error) {
-      console.error("Login error:", error.response?.data || error.message);
+      console.error("Login error:", error.response.data || error.message);
       alert("Login failed! Please check your credentials.");
     }
   };
