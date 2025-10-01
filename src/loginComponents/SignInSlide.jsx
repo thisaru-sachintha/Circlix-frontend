@@ -53,7 +53,6 @@ function SignInSlide(props) {
     };
 
     try {
-
       const response = await axios.post(
         "http://localhost:8080/api/v1/user/signIn",
         signData,
@@ -75,7 +74,6 @@ function SignInSlide(props) {
         alert("Login failed.");
       }
     } catch (error) {
-      console.error("Login error:", error.response.data || error.message);
       alert("Login failed! Please check your credentials.");
     }
   };
@@ -93,23 +91,18 @@ function SignInSlide(props) {
   }
   const handleSendOTP = async () => {
     if (!recoveryEmail) {
-      alert("Please enter OTP and new password.");
+      alert("Please enter the recovery email.");
       return;
     }
 
     try {
       const response = await axios.post(
         "http://localhost:8080/api/v1/user/forgot-password",
-        { email: recoveryEmail }
+        { emailRecover: recoveryEmail }
       );
-      if (response.data.success) {
-        setShowEmailModal(false);
-        setShowOTPModal(true);
-      } else {
-        alert("Failed to send OTP. Please check NIC and Email.");
-      }
+      setShowEmailModal(false);
+      setShowOTPModal(true);
     } catch (error) {
-      console.error("OTP send error:", error.response?.data || error.message);
       alert("Error sending OTP.");
     }
   };
@@ -123,17 +116,21 @@ function SignInSlide(props) {
     try {
       const response = await axios.post(
         "http://localhost:8080/api/v1/user/verify-OTP",
-        { email: recoveryEmail, otp: otp, newPassword: newPassword }
+        { email: recoveryEmail, otp: otp, newPassword: newPassword },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
-      const token = response.data.token;
-      if (token) {
-        localStorage.setItem("token", token);
-        alert("Password reset successful! Logged in.");
+
+      if (response.status==200) {
+        alert("Password reset successful. SignIn with the new password")
         setShowOTPModal(false);
-        navigate("/user");
       } else {
-        alert("OTP verification failed.");
+        alert("Failed to reset password. Enter correct values in the fields.")
       }
+
     } catch (error) {
       console.error("OTP reset error:", error.response?.data || error.message);
       alert("Failed to reset password.");

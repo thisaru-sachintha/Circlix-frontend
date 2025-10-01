@@ -27,7 +27,7 @@ function UserProfileCard(props) {
         </div>
         <ul
           className="list-group list-group-flush  d-flex flex-wrap justify-content-center border"
-          style={{ minWidth: "220px" }}
+          style={{ minWidth: "120px" }}
         >
           {[
             { label: "DOB", value: props.dob },

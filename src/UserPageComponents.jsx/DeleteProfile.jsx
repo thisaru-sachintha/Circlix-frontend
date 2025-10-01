@@ -10,10 +10,11 @@ function DeleteProfile() {
     try {
       const token = localStorage.getItem("token");
       //taking user data
-      const { data } = await axios.get(`http://localhost:8080/api/v1/user/me`, {
+      const info  = await axios.get(`http://localhost:8080/api/v1/user/me`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      //setUserID(data.userId);
+      setUserID(info.data.userID);
+      
     } catch (err) {
       console.error("Failed to fetch user data:", err);
     }
@@ -26,6 +27,7 @@ function DeleteProfile() {
   const handleDelete = async () => {
     try {
       const token = localStorage.getItem("token");
+
       await axios.delete(
         `http://localhost:8080/api/v1/user/deleteMyAccount/${userID}`,
         {
